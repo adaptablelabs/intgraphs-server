@@ -1,0 +1,3 @@
+[submodule "apps/intgraphs"]
+	path = apps/intgraphs
+	url = git@github.com:adaptablelabs/intgraphs.git

@@ -1,0 +1,33 @@
+## ===============================================================================
+#  Docker Compose Config - intgraphs Server
+#
+#  Usage:
+#  - docker-compose up --build
+#
+#  NOTE: The current setup is only for "local" development. 
+#
+## ===============================================================================
+
+version: '2'
+
+services:
+  intgraphs:
+    build:
+      context: ./
+      dockerfile: ./containers/intgraphs_cron/Dockerfile
+    volumes_from:
+      - intgraphsdata
+    volumes:
+      - ./data/log:/var/log:rw
+    # environment:
+      # 
+      # Ref - https://crontab.guru/
+      # SCHEDULE: '*/5 * * * *' # Every 2 min
+      # SCHEDULE: '5 7 * * *' # 7:05AM UTC (1:05 PDT)
+    # command: tail -f /dev/null
+
+  intgraphsdata:
+    image: busybox
+    volumes:
+      - ./:/intgraphs_server:rw
+    command: /bin/true
